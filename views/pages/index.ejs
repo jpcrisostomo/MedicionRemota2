@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Adding a data chart using Chart.js, library dynamically loads data -->
+<head>
+    <title>Medicion Remota</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js'></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    
+</head>
+<body onload="javascript:init()">
+<hr />
+<h1>Medicion remota de pacientes</h1>
+<hr />
+<hr />
+<div>
+  <canvas id="line-chart" width="800" height="450"></canvas>
+</div>
+<hr />
+<div>
+  <input type="range" min="1" max="10" value="5" id="dataRateSlider" oninput="sendDataRate()" />
+  <label for="dataRateSlider" id="dataRateLabel">Rate: 0.5 Hz</label>
+</div>
+<hr />
+<h3>Últimas mediciones</h3>
+  <h3 id = 'tmp'> Temperaturaaaa</h3>
+  <h3 id = '%Oxig'> oxig</h3>
+  <h3 id = 'fResp'> resp</h3>
+  <h3 id = 'fCard'> card</h3>
+</ul>
+<hr />
+<div>
+<!-- Adding JAVASCRIPT to webpage),  -->
+<script src=>"src/app.js"</script>
+</head>
+<script>
+  function init() {
+  let sse = new EventSource('http://localhost/stream');
+
+  dataPlot = new Chart(document.getElementById("line-chart"), {
+    type: 'line',
+    data: {
+      labels: [],
+      datasets: [{
+        data: [],
+        label: "Medicion (Unidad)",
+        borderColor: "#3e95cd",
+        fill: true
+      }]
+    }
+  });
+
+  sse.onmessage = function(event) {
+    var data = JSON.parse(event.data);
+    console.log(data)
+    var today = new Date();
+    var t = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    addData(t, data.value);
+  }
+}
+
+</script>
+</body>
+</html>
