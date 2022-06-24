@@ -1,24 +1,21 @@
 /* Javascript based on Express */
 
 const express = require('express');
-const app = express(); //Este es mi servidor
-const morgan = require('morgan'); //Uso middleware rutas
+const app = express();
+const morgan = require('morgan'); 
 //const cors = require('cors'); //Uso middleware rutas
 const ejs = require('ejs');
 
-app.set('view engine', 'ejs');
 //app.set('views', path.join(__dirname, 'views')); //Para get home
 
-//app.use(cors())
-app.use(
-    express.urlencoded({
-      extended: true,
-    })
-  );
+//app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(morgan('tiny')); //Middleware console logs
 
-app.use(morgan('tiny')); //Middleware console logs //Middleware console >
-//app.use(express.static('public'));
+app.use('/', express.static('src'));
+app.set('view engine', 'ejs');
+
 var sensores = 'hola';
 var ecg ='123';
 
@@ -34,33 +31,11 @@ app.post('/ecg', (req, res) => {
   res.end();
 });
 
-/* Res. Render funcional 
+//Entregar HTML on load 
 app.get("/", (req, res) => {
-  var mediciones = [sensores, ecg];
-  res.render('pages/index',{
-    mediciones: mediciones
-  });
-  //res.end();
-  //res.render("index.ejs", {medicion});
-});
-
-*/
-
-/* res.render adaptada */
-app.get("/", (req, res) => {
-  var mediciones = [sensores, ecg];
   res.render('pages/index');
-  //res.end();
-  //res.render("index.ejs", {medicion});
+  res.end();
 });
-
-app.get("/stream", (req, res) => {
-  res.setHeader("Content-Type", "text/event-stream");
-  var mediciones = [sensores, ecg];
-  res.write("mediciones: "+ mediciones + "\n\n");
-  });
-  //res.end();
-  //res.render("index.ejs", {medicion});
 
 /*
 app.get("/camera_uploads/", (req, res) => {
