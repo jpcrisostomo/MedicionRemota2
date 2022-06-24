@@ -1,0 +1,44 @@
+
+/******************************************************************************************************************************
+ ESP32 AS CLIENT
+ https://www.youtube.com/c/jadsatv
+ *******************************************************************************************************************************/
+
+#include <Arduino.h>  //Solo si uso platformio
+#include <WiFi.h>
+#include <HTTPClient.h> // nos permite hacer peticiones http
+
+#include <functions_server.h>
+
+// credenciales de la red a la cual nos conectaremos
+const char* ssid = "dlink-B150";
+const char* password = "mespr62390";
+
+// Url's para hacer las peticiones
+const char* URL_server_home = "http://45.33.35.67/"; 
+const char* URL_local_OSX = "http://192.168.100.100/";
+
+const int requestInterval = 2000;  // 2s
+
+String datatype_1 = "tmp";
+String last_measurement_1 = "24 grados"; 
+
+
+void setup(){
+  Serial.begin(115200);
+  WifiConnect(ssid, password);
+    
+}
+
+void loop(){
+  if(WiFi.status()== WL_CONNECTED ){ 
+    
+    PostRequest(URL_local_OSX, datatype_1, last_measurement_1);
+  }
+  else{
+    Serial.println("Disconnected from server, reconnecting");
+    WifiConnect(ssid, password);
+  }
+  delay(requestInterval);
+}
+
