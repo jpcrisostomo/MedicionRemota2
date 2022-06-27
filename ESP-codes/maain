@@ -18,11 +18,7 @@ const char* password = "mespr62390";
 const char* URL_server_home = "http://45.33.35.67/"; 
 const char* URL_local_OSX = "http://192.168.100.100/";
 
-const int requestInterval = 2000;  // 2s
-
-String datatype_1 = "tmp";
-String last_measurement_1 = "24 grados"; 
-
+const int requestInterval = 15;  // 2s
 
 void setup(){
   Serial.begin(115200);
@@ -31,14 +27,40 @@ void setup(){
 }
 
 void loop(){
+
+  Mecg = 2.5*i;
+  Mtmp= 10.0 +i;
+  Moxi= Mtmp+ Mecg;
+  Mresp= i*5.5;
+  Mfcard= 1.5*Mtmp+ Mecg;
+  
+  ecg=   measure2JSON( Mecg, "ecg");
+  tmp=   measure2JSON( Mtmp, "tmp");
+  oxi=   measure2JSON( Moxi, "oxi");
+  fresp= measure2JSON( Mresp, "resp");
+  fcard= measure2JSON( Mfcard,"fcard");
+  todos_los_sensores = bigJSON2( ecg, tmp, oxi, fresp, fcard);
+  Serial.println(" ");
+
+  delay(requestInterval);
+
   if(WiFi.status()== WL_CONNECTED ){ 
-    
-    PostRequest(URL_local_OSX, datatype_1, last_measurement_1);
+
+    if ((j%3)==0){
+      Serial.println("Se envía: "+ todos_los_sensores);
+      PostData( URL_local_OSX, todos_los_sensores);
+    }
   }
+      
   else{
     Serial.println("Disconnected from server, reconnecting");
     WifiConnect(ssid, password);
   }
-  delay(requestInterval);
+
+  i++;
+  j++;
+  if (i>= 300){ i=0;}
+  if (j>= 200){ j=0;}
+
 }
 

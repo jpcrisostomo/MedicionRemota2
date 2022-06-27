@@ -1,41 +1,49 @@
 /* Javascript based on Express */
 
 const express = require('express');
-const app = express();
 const morgan = require('morgan'); 
 //const cors = require('cors'); //Uso middleware rutas
-const ejs = require('ejs');
-
+//const ejs = require('ejs');
+const fetch = require('node-fetch');
 //app.set('views', path.join(__dirname, 'views')); //Para get home
+const app = express();
 
 //app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-app.use(morgan('tiny')); //Middleware console logs
+app.use(morgan('tiny')); //Middleware console logs 'tiny'
+app.use(express.static('public'));
+//app.set('view engine', 'ejs');
 
-app.use('/', express.static('src'));
-app.set('view engine', 'ejs');
 
-var sensores = 'hola';
-var ecg ='123';
+var mediciones= {ecg: "350.50",
+tmp: "149.00",
+oxi: "496.50",
+resp: "764.50",
+fcard: "571.00"} //Donde almaceno los JSON
+
 
 app.post('/', (req, res) => {
   console.log(req.body);
-  sensores = req.body;
+  mediciones = req.body;
   res.end();
 });
 
-app.post('/ecg', (req, res) => {
+app.get("/mediciones", async (req, res) => {
   console.log(req.body);
-  ecg = req.body;
+  //res.setHeader("Access-Control-Allow-Origin", "*");
+  res.json(mediciones); //Envio las mediciones como json
   res.end();
 });
+
 
 //Entregar HTML on load 
 app.get("/", (req, res) => {
-  res.render('pages/index');
+  res.render('/public/index.html');
   res.end();
 });
+
+
 
 /*
 app.get("/camera_uploads/", (req, res) => {
@@ -45,4 +53,4 @@ app.get("/camera_uploads/", (req, res) => {
 
 app.listen(80, () => {
     console.log('Server on port 80')
-})
+});
