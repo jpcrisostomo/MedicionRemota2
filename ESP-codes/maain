@@ -1,14 +1,15 @@
 
 /******************************************************************************************************************************
- ESP32 AS CLIENT
- https://www.youtube.com/c/jadsatv
+ ESP32 AS CLIENT https://www.youtube.com/c/jadsatv
  *******************************************************************************************************************************/
 
-#include <Arduino.h>  //Solo si uso platformio
+#include <Arduino.h>
 #include <WiFi.h>
-#include <HTTPClient.h> // nos permite hacer peticiones http
+#include <HTTPClient.h> 
+#include <Update.h>  
 
 #include <functions_server.h>
+#include <functions_ota.h>
 
 // credenciales de la red a la cual nos conectaremos
 const char* ssid = "dlink-B150";
@@ -18,7 +19,7 @@ const char* password = "mespr62390";
 const char* URL_server_home = "http://45.33.35.67/"; 
 const char* URL_local_OSX = "http://192.168.100.100/";
 
-const int requestInterval = 15;  // 2s
+const int requestInterval = 1000;  // 2s
 
 void setup(){
   Serial.begin(115200);
@@ -44,11 +45,17 @@ void loop(){
 
   delay(requestInterval);
 
-  if(WiFi.status()== WL_CONNECTED ){ 
+  if(WiFi.status()== WL_CONNECTED){ 
 
     if ((j%3)==0){
       Serial.println("Se envía: "+ todos_los_sensores);
       PostData( URL_local_OSX, todos_los_sensores);
+    }
+    else if ((j%7)==0){
+        Serial.print("Current firmware: v");
+        Serial.println(FWversion);
+        Serial.println("VERSION VIEJA");
+        checkupdate();
     }
   }
       

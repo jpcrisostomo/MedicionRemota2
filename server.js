@@ -20,7 +20,7 @@ var mediciones= {ecg: "350.50",
 tmp: "149.00",
 oxi: "496.50",
 resp: "764.50",
-fcard: "571.00"} //Donde almaceno los JSON
+fcard: "571.00"} //Var inicial
 
 
 app.post('/', (req, res) => {
@@ -32,10 +32,9 @@ app.post('/', (req, res) => {
 app.get("/mediciones", async (req, res) => {
   console.log(req.body);
   //res.setHeader("Access-Control-Allow-Origin", "*");
-  res.json(mediciones); //Envio las mediciones como json
+  res.json(mediciones);
   res.end();
 });
-
 
 //Entregar HTML on load 
 app.get("/", (req, res) => {
@@ -43,13 +42,24 @@ app.get("/", (req, res) => {
   res.end();
 });
 
-
-
-/*
-app.get("/camera_uploads/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+//Entregar Software on get request 
+app.get('/firmware/', function(req, res){
+  const file = `${__dirname}/public/firmware/myprogram_v4.bin`;
+  res.download(file); // Set disposition and send it.
+  res.status(200);
 });
-*/
+
+//Entregar HTML images on load 
+app.get("/images", (req, res) => {
+  res.render('/public/images.html');
+  res.end();
+});
+
+//Entregar HTML images on load 
+app.get("/audio", (req, res) => {
+  res.render('/public/audio.html');
+  res.end();
+});
 
 app.listen(80, () => {
     console.log('Server on port 80')

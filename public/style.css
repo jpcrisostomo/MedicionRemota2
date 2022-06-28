@@ -1,4 +1,25 @@
 p {
     padding: 10px;
-    background-color: #ffddff;
+    background-color: #a3a0a0;
   }
+
+  body {
+    background: #edebeb;
+    color: rgb(21, 23, 32);
+  }
+  
+  .navbar-brand {
+    list-style-type: none;
+    font-family: 'Spicy Rice', sans-serif;
+    font-size: 1.5rem;
+  }
+  
+  .nav-link {
+    text-transform: uppercase;
+    font-family: 'Spicy Rice', sans-serif;
+  }
+  
+  header img {
+    width: 60%;
+  }
+  

@@ -1,0 +1,30 @@
+<!-- index test -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js'></script>
+
+    <title>MEDICIONES QLS</title>
+</head>
+
+<body onload="javascript:init()">
+    <h1>Mediciones QLS</h1>
+    <div>
+        <canvas id="line-chart" width="800" height="450"></canvas>
+      </div>
+
+    <p>
+        Temperatura: <span id="temperatura"></span>°C<br />
+        % Oxigenación: <span id="oxigenacion"></span><br />
+        Frecuencia Cardiaca: <span id="f_respiratoria"></span><br />
+        Frecuencia Respiratoria: <span id="f_cardiaca"></span>      
+    </p>
+
+   <!--  <div class="container"></div>  Para agregar mas codigo de otro lado --->
+    <script src="app.js"></script>
+</body>
+</html>
