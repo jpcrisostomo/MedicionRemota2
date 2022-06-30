@@ -2,13 +2,13 @@
 
 const express = require('express');
 const morgan = require('morgan'); 
-//const cors = require('cors'); //Uso middleware rutas
+const cors = require('cors'); //Uso middleware rutas
 //const ejs = require('ejs');
 const fetch = require('node-fetch');
 //app.set('views', path.join(__dirname, 'views')); //Para get home
 const app = express();
 
-//app.use(cors());
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny')); //Middleware console logs 'tiny'
@@ -31,7 +31,7 @@ app.post('/', (req, res) => {
 
 app.get("/mediciones", async (req, res) => {
   console.log(req.body);
-  //res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.json(mediciones);
   res.end();
 });

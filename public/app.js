@@ -1,8 +1,13 @@
+// LINODE    "http://45.33.35.67/mediciones/"
+// Local PC "http://localhost/mediciones/"
+// let URL_Local_Get_Mediciones = "http://localhost/mediciones/";
+// let URL_Linode = "http://45.33.35.67/mediciones/";
 
 async function getMediciones() {
-  let URL_Local_Get_Mediciones = "http://localhost/mediciones/";
+  let URL_Mediciones = "http://45.33.35.67/mediciones/";  
+
   try {
-      const res = await fetch(URL_Local_Get_Mediciones); 
+      const res = await fetch(URL_Mediciones); 
       const datillos = await res.json();
       const { ecg, tmp, oxi, resp, fcard } = datillos;
       //Cargar datos ECG a chart js
