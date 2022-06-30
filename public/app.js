@@ -22,7 +22,7 @@ async function getMediciones() {
   }
 }
 
-setInterval(getMediciones,100);
+setInterval(getMediciones,250);
 
 function init() {
 dataPlot = new Chart(document.getElementById("line-chart"), {
