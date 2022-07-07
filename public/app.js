@@ -20,13 +20,13 @@ async function getMediciones() {
       if(btn1=="1"||btn1==1){
         document.getElementById('b1').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
       }
-    if(btn2=="1"||btn1==1){
+    if(btn2=="1"||btn2==1){
         document.getElementById('b2').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
       }
-    if(btn2=="1"||btn1==1){
+    if(btn3=="1"||btn3==1){
         document.getElementById('b3').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
       }
-    if(btn2=="1"||btn1==1){
+    if(btn4=="1"||btn4==1){
         document.getElementById('b4').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
       }
   } catch (error) {  
