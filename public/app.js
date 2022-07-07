@@ -5,9 +5,6 @@
 
 async function getMediciones() {
   let URL_Mediciones = "http://45.33.35.67/mediciones/";  
-
-  var hora = new Date();
-  var h = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   
   try {
       const res = await fetch(URL_Mediciones); 
@@ -20,10 +17,10 @@ async function getMediciones() {
       document.getElementById('oxigenacion').textContent = oxi;
       document.getElementById('f_respiratoria').textContent = resp;
       document.getElementById('f_cardiaca').textContent = fcard;
-      document.getElementById('b1').textContent = h;
-      document.getElementById('b2').textContent = h;
-      document.getElementById('b3').textContent = h;
-      document.getElementById('b4').textContent = h;
+      document.getElementById('b1').textContent = oxi;
+      document.getElementById('b2').textContent = oxi;
+      document.getElementById('b3').textContent = oxi;
+      document.getElementById('b4').textContent = oxi;
   } catch (error) {  
       console.log(error);
   }
