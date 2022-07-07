@@ -36,7 +36,7 @@ async function getMediciones() {
 }
 
 setInterval(getMediciones,1000);
-setInterval(actualizeECGindex,50);
+setInterval(actualizeECGindex,55);
 
 function init() {
 dataPlot = new Chart(document.getElementById("line-chart"), {
