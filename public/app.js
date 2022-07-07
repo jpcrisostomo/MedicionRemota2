@@ -4,7 +4,7 @@
 // let URL_Linode = "http://45.33.35.67/mediciones/";
 
 async function getMediciones() {
-  let URL_Mediciones = "http://45.33.35.67/mediciones/";  
+  let URL_Mediciones = "http://localhost/mediciones/";  
   
   try {
       const res = await fetch(URL_Mediciones); 
@@ -13,19 +13,23 @@ async function getMediciones() {
       //Cargar datos ECG a chart js
       ECGs = [ecg1,ecg2,ecg3,ecg4,ecg5,ecg6,ecg7,ecg8,ecg9,ecg10,ecg11,ecg12,ecg13,ecg14,ecg15,ecg17,ecg18,ecg19,ecg20]; 
       const d = new Date();
+
       document.getElementById('temperatura').textContent = tmp;
       document.getElementById('oxigenacion').textContent = oxi;
       document.getElementById('f_respiratoria').textContent = resp;
       document.getElementById('f_cardiaca').textContent = fcard;
-    if(boton1=="1"||boton1==1){
-      document.getElementById('b1').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();}
-      if(boton2=="1"||boton2==1){
-      document.getElementById('b2').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();}
-     if(boton3=="1"||boton3==1){
-      document.getElementById('b3').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();}
-     if(boton4=="1"||boton4==1){
-      document.getElementById('b4').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();}
-    
+      if(btn1=="1"||btn1==1){
+        document.getElementById('b1').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      }
+    if(btn2=="1"||btn2==1){
+        document.getElementById('b2').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      }
+    if(btn3=="1"||btn3==1){
+        document.getElementById('b3').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      }
+    if(btn4=="1"||btn4==1){
+        document.getElementById('b4').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      }
   } catch (error) {  
       console.log(error);
   }
@@ -33,11 +37,6 @@ async function getMediciones() {
 
 setInterval(getMediciones,1000);
 setInterval(actualizeECGindex,50);
-
-var dataPlot;
-var maxDataPoints = 140;
-var ECGs = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; 
-var ECG_index=0;
 
 function init() {
 dataPlot = new Chart(document.getElementById("line-chart"), {
@@ -53,6 +52,14 @@ dataPlot = new Chart(document.getElementById("line-chart"), {
   }
 });
 }
+
+setInterval(actualizeECGindex,50);
+
+
+var ECGs = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; 
+var dataPlot;
+var maxDataPoints = 140;
+var ECG_index=0;
 
 function actualizeECGindex()
 {
