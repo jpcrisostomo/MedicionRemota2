@@ -9,9 +9,9 @@ async function getMediciones() {
   try {
       const res = await fetch(URL_Mediciones); 
       const datillos = await res.json();
-      const { ecg, tmp, oxi, resp, fcard, boton1, boton2, boton3, boton4  } = datillos;
+      const { ecg1,ecg2,ecg3,ecg4,ecg5,ecg6,ecg7,ecg8,ecg9,ecg10,ecg11,ecg12,ecg13,ecg14,ecg15,ecg17,ecg18,ecg19,ecg20, tmp, oxi, resp, fcard, btn1, btn2, btn3, btn4  } = datillos;
       //Cargar datos ECG a chart js
-      passECG(ecg); 
+      ECGs = [ecg1,ecg2,ecg3,ecg4,ecg5,ecg6,ecg7,ecg8,ecg9,ecg10,ecg11,ecg12,ecg13,ecg14,ecg15,ecg17,ecg18,ecg19,ecg20]; 
       const d = new Date();
       document.getElementById('temperatura').textContent = tmp;
       document.getElementById('oxigenacion').textContent = oxi;
@@ -32,6 +32,12 @@ async function getMediciones() {
 }
 
 setInterval(getMediciones,1000);
+setInterval(actualizeECGindex,50);
+
+var dataPlot;
+var maxDataPoints = 140;
+var ECGs = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]; 
+var ECG_index=0;
 
 function init() {
 dataPlot = new Chart(document.getElementById("line-chart"), {
@@ -48,8 +54,14 @@ dataPlot = new Chart(document.getElementById("line-chart"), {
 });
 }
 
-var dataPlot;
-var maxDataPoints = 140;
+function actualizeECGindex()
+{
+  passECG(ECGs[ECG_index]);
+  ECG_index ++;
+  if (ECG_index ==20){
+    ECG_index=0;
+  }
+}
 
 function passECG(ecg) {
   console.log(ecg);
@@ -57,8 +69,6 @@ function passECG(ecg) {
   var t = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   addData(t, ecg);
 }
-
-
 
 function removeData(){
 dataPlot.data.labels.shift();
