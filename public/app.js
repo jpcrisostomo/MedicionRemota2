@@ -18,16 +18,10 @@ async function getMediciones() {
       document.getElementById('f_respiratoria').textContent = resp;
       document.getElementById('f_cardiaca').textContent = fcard;
       document.getElementById('b1').textContent = btn1;
-      
-    if(btn2=="1"||btn2==1){
-        document.getElementById('b2').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-      }
-    if(btn3=="1"||btn3==1){
-        document.getElementById('b3').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-      }
-    if(btn4=="1"||btn4==1){
-        document.getElementById('b4').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
-      }
+      document.getElementById('b2').textContent = btn2;
+      document.getElementById('b3').textContent = btn3;
+      document.getElementById('b4').textContent = btn4;
+    
   } catch (error) {  
       console.log(error);
   }
