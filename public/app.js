@@ -9,7 +9,7 @@ async function getMediciones() {
   try {
       const res = await fetch(URL_Mediciones); 
       const datillos = await res.json();
-      const { ecg, tmp, oxi, resp, fcard, btn1, btn2, btn3, btn4  } = datillos;
+      const { ecg, tmp, oxi, resp, fcard, boton1, boton2, boton3, boton4  } = datillos;
       //Cargar datos ECG a chart js
       passECG(ecg); 
       const d = new Date();
@@ -17,10 +17,10 @@ async function getMediciones() {
       document.getElementById('oxigenacion').textContent = oxi;
       document.getElementById('f_respiratoria').textContent = resp;
       document.getElementById('f_cardiaca').textContent = fcard;
-      document.getElementById('b1').textContent = btn1;
-      document.getElementById('b2').textContent = btn2;
-      document.getElementById('b3').textContent = btn3;
-      document.getElementById('b4').textContent = btn4;
+      document.getElementById('b1').textContent = boton1;
+      document.getElementById('b2').textContent = boton2;
+      document.getElementById('b3').textContent = boton3;
+      document.getElementById('b4').textContent = boton4;
     
   } catch (error) {  
       console.log(error);
