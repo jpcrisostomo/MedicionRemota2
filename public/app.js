@@ -17,7 +17,8 @@ async function getMediciones() {
       document.getElementById('oxigenacion').textContent = oxi;
       document.getElementById('f_respiratoria').textContent = resp;
       document.getElementById('f_cardiaca').textContent = fcard;
-      document.getElementById('b1').textContent = boton1;
+    if(boton1=="1"||boton1==1){
+      document.getElementById('b1').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();}
       document.getElementById('b2').textContent = boton2;
       document.getElementById('b3').textContent = boton3;
       document.getElementById('b4').textContent = boton4;
