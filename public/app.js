@@ -9,7 +9,7 @@ async function getMediciones() {
   try {
       const res = await fetch(URL_Mediciones); 
       const datillos = await res.json();
-      const { ecg, tmp, oxi, resp, fcard } = datillos;
+      const { ecg, tmp, oxi, resp, fcard, btn1, btn2, btn3, btn4  } = datillos;
       //Cargar datos ECG a chart js
       passECG(ecg); 
       const d = new Date();
@@ -17,10 +17,12 @@ async function getMediciones() {
       document.getElementById('oxigenacion').textContent = oxi;
       document.getElementById('f_respiratoria').textContent = resp;
       document.getElementById('f_cardiaca').textContent = fcard;
-      document.getElementById('b1').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();;
-      document.getElementById('b2').textContent = oxi;
-      document.getElementById('b3').textContent = oxi;
-      document.getElementById('b4').textContent = oxi;
+      if(btn1=="1"||btn1==1){
+        document.getElementById('b1').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      }
+      document.getElementById('b2').textContent =  d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      document.getElementById('b3').textContent =  d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+      document.getElementById('b4').textContent =  d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
   } catch (error) {  
       console.log(error);
   }
