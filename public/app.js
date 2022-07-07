@@ -12,12 +12,12 @@ async function getMediciones() {
       const { ecg, tmp, oxi, resp, fcard } = datillos;
       //Cargar datos ECG a chart js
       passECG(ecg); 
-      
+      const d = new Date();
       document.getElementById('temperatura').textContent = tmp;
       document.getElementById('oxigenacion').textContent = oxi;
       document.getElementById('f_respiratoria').textContent = resp;
       document.getElementById('f_cardiaca').textContent = fcard;
-      document.getElementById('b1').textContent = oxi;
+      document.getElementById('b1').textContent = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();;
       document.getElementById('b2').textContent = oxi;
       document.getElementById('b3').textContent = oxi;
       document.getElementById('b4').textContent = oxi;
