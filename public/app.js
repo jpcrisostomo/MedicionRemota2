@@ -6,14 +6,16 @@
 async function getMediciones() {
   let URL_Mediciones = "http://45.33.35.67/mediciones/";  
 
+  var hora = new Date();
+  var h = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  
   try {
       const res = await fetch(URL_Mediciones); 
       const datillos = await res.json();
       const { ecg, tmp, oxi, resp, fcard } = datillos;
       //Cargar datos ECG a chart js
       passECG(ecg); 
-      var hora = new Date();
-      var h = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      
       document.getElementById('temperatura').textContent = tmp;
       document.getElementById('oxigenacion').textContent = oxi;
       document.getElementById('f_respiratoria').textContent = resp;
