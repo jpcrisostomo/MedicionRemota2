@@ -17,6 +17,18 @@ async function getMediciones() {
       document.getElementById('oxigenacion').textContent = oxi;
       document.getElementById('f_respiratoria').textContent = resp;
       document.getElementById('f_cardiaca').textContent = fcard;
+    if(btn1=="1"||btn1==1){
+        document.getElementById('b1').textContent = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      }
+      if(btn1=="2"||btn1==2){
+        document.getElementById('b2').textContent = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      }
+      if(btn1=="3"||btn1==3){
+        document.getElementById('b3').textContent = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      }
+      if(btn1=="4"||btn1==4){
+        document.getElementById('b4').textContent = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+      }
   } catch (error) {  
       console.log(error);
   }
